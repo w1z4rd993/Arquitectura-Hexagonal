@@ -1,3 +1,11 @@
 spring:
   application:
     name: arquitectura-hexagonal
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    name: ${DB_NAME}
+    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+  config:
+    import: "optional:file:.env[.properties]"
