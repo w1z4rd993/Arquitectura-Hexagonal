@@ -7,7 +7,7 @@ public class User {
 	private String dni;
 	private String email;
 
-	private User(Long id, String firstName, String lastName, String dni, String email) {
+	public User(Long id, String firstName, String lastName, String dni, String email) {
 		if (firstName == null || firstName.isEmpty()) {
 			throw new IllegalArgumentException("First name cannot be empty");
 		}
@@ -26,11 +26,7 @@ public class User {
 		this.dni = dni;
 		this.email = email;
 	}
-
-	public static User create(Long id, String firstName, String lastName, String dni, String email) {
-		return new User(id, firstName, lastName, dni, email);
-	}
-
+	
 	public Long getId() {
 		return id;
 	}
