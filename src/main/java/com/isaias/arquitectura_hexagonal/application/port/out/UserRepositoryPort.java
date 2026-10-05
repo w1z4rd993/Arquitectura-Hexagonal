@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface UserRepositoryPort {
 	List<User> getUsers();
+
+	User save(User user);
 }

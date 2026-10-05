@@ -2,6 +2,7 @@ package com.isaias.arquitectura_hexagonal.infrastructure.adapter.out.persistance
 
 import com.isaias.arquitectura_hexagonal.application.port.out.UserRepositoryPort;
 import com.isaias.arquitectura_hexagonal.domain.model.User;
+import com.isaias.arquitectura_hexagonal.infrastructure.adapter.out.persistance.entity.UserJpaEntity;
 import com.isaias.arquitectura_hexagonal.infrastructure.adapter.out.persistance.mapper.UserPersistenceMapper;
 import com.isaias.arquitectura_hexagonal.infrastructure.adapter.out.persistance.repository.UserJpaRepository;
 import org.springframework.stereotype.Service;
@@ -21,5 +22,11 @@ public class UserPersistenceAdapter implements UserRepositoryPort {
 	@Override
 	public List<User> getUsers() {
 		return userRepository.findAll().stream().map(userMapper::toDomain).toList();
+	}
+
+	@Override
+	public User save(User user) {
+		UserJpaEntity userEntity = userMapper.toEntity(user);
+		return userMapper.toDomain(userRepository.save(userEntity));
 	}
 }
