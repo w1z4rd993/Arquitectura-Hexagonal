@@ -8,4 +8,6 @@ public interface UserRepositoryPort {
 	List<User> getUsers();
 
 	User save(User user);
+
+	User getById(Long id);
 }
