@@ -1,6 +1,7 @@
 package com.isaias.arquitectura_hexagonal.infrastructure.adapter.in.rest;
 
 import com.isaias.arquitectura_hexagonal.application.port.in.CreateUserUseCase;
+import com.isaias.arquitectura_hexagonal.application.port.in.DeleteUserUseCase;
 import com.isaias.arquitectura_hexagonal.application.port.in.GetUserUseCase;
 import com.isaias.arquitectura_hexagonal.application.port.in.GetUsersUseCase;
 import com.isaias.arquitectura_hexagonal.domain.model.User;
@@ -20,12 +21,14 @@ public class UserController {
 	private final GetUsersUseCase getUsersUseCase;
 	private final CreateUserUseCase createUserUseCase;
 	private final GetUserUseCase getUserUseCase;
+	private final DeleteUserUseCase deleteUserUseCase;
 	private final UserRestMapper userRestMapper;
 
-	public UserController(GetUsersUseCase getUsersUseCase, CreateUserUseCase createUserUseCase, GetUserUseCase getUserUseCase, UserRestMapper userRestMapper) {
+	public UserController(GetUsersUseCase getUsersUseCase, CreateUserUseCase createUserUseCase, GetUserUseCase getUserUseCase, DeleteUserUseCase deleteUserUseCase, UserRestMapper userRestMapper) {
 		this.getUsersUseCase = getUsersUseCase;
 		this.createUserUseCase = createUserUseCase;
 		this.getUserUseCase = getUserUseCase;
+		this.deleteUserUseCase = deleteUserUseCase;
 		this.userRestMapper = userRestMapper;
 	}
 
@@ -44,5 +47,11 @@ public class UserController {
 		User user = userRestMapper.toEntity(userRequest);
 		CreateUserResponse response = userRestMapper.toResponse(createUserUseCase.create(user));
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> deleteUserById(@PathVariable Long id) {
+		deleteUserUseCase.delete(id);
+		return ResponseEntity.noContent().build();
 	}
 }

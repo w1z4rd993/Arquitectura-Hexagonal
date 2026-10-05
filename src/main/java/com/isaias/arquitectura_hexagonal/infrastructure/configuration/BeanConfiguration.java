@@ -1,6 +1,7 @@
 package com.isaias.arquitectura_hexagonal.infrastructure.configuration;
 
 import com.isaias.arquitectura_hexagonal.application.port.in.CreateUserUseCase;
+import com.isaias.arquitectura_hexagonal.application.port.in.DeleteUserUseCase;
 import com.isaias.arquitectura_hexagonal.application.port.in.GetUserUseCase;
 import com.isaias.arquitectura_hexagonal.application.port.in.GetUsersUseCase;
 import com.isaias.arquitectura_hexagonal.application.port.out.UserRepositoryPort;
@@ -24,6 +25,11 @@ public class BeanConfiguration {
 
 	@Bean
 	public GetUserUseCase getUserUseCase(UserRepositoryPort userRepositoryPort) {
+		return new UserService(userRepositoryPort);
+	}
+
+	@Bean
+	public DeleteUserUseCase deleteUserUseCase(UserRepositoryPort userRepositoryPort) {
 		return new UserService(userRepositoryPort);
 	}
 }

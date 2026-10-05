@@ -37,4 +37,12 @@ public class UserPersistenceAdapter implements UserRepositoryPort {
 				.map(userMapper::toDomain)
 				.orElseThrow(() -> new UserNotFoundException("Usuario no encontrado"));
 	}
+
+	@Override
+	public void deleteById(Long id) {
+		if (!userRepository.existsById(id)) {
+			throw new UserNotFoundException("Usuario no encontrado");
+		}
+		userRepository.deleteById(id);
+	}
 }

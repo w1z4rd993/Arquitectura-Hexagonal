@@ -1,6 +1,7 @@
 package com.isaias.arquitectura_hexagonal.application.service;
 
 import com.isaias.arquitectura_hexagonal.application.port.in.CreateUserUseCase;
+import com.isaias.arquitectura_hexagonal.application.port.in.DeleteUserUseCase;
 import com.isaias.arquitectura_hexagonal.application.port.in.GetUserUseCase;
 import com.isaias.arquitectura_hexagonal.application.port.in.GetUsersUseCase;
 import com.isaias.arquitectura_hexagonal.application.port.out.UserRepositoryPort;
@@ -8,7 +9,7 @@ import com.isaias.arquitectura_hexagonal.domain.model.User;
 
 import java.util.List;
 
-public class UserService implements GetUsersUseCase, CreateUserUseCase, GetUserUseCase {
+public class UserService implements GetUsersUseCase, CreateUserUseCase, GetUserUseCase, DeleteUserUseCase {
 	private final UserRepositoryPort userRepositoryPort;
 
 	public UserService(UserRepositoryPort userRepositoryPort) {
@@ -28,5 +29,10 @@ public class UserService implements GetUsersUseCase, CreateUserUseCase, GetUserU
 	@Override
 	public User getById(Long id) {
 		return userRepositoryPort.getById(id);
+	}
+
+	@Override
+	public void delete(Long id) {
+		userRepositoryPort.deleteById(id);
 	}
 }
