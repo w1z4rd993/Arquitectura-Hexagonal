@@ -1,4 +1,4 @@
-package com.isaias.arquitectura_hexagonal.infrastructure.ports.out.entity;
+package com.isaias.arquitectura_hexagonal.infrastructure.adapter.out.persistance.entity;
 
 import jakarta.persistence.*;
 
@@ -21,7 +21,8 @@ public class UserJpaEntity {
 	@Column(length = 100, nullable = false, unique = true)
 	private String email;
 
-	public UserJpaEntity() {}
+	public UserJpaEntity() {
+	}
 
 	public UserJpaEntity(Long id, String firstName, String lastName, String dni, String email) {
 		this.id = id;

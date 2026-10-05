@@ -1,4 +1,4 @@
-package com.isaias.arquitectura_hexagonal.domain;
+package com.isaias.arquitectura_hexagonal.domain.model;
 
 public class User {
 	private Long id;
@@ -26,7 +26,7 @@ public class User {
 		this.dni = dni;
 		this.email = email;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}

@@ -1,17 +1,20 @@
 package com.isaias.arquitectura_hexagonal.application.service;
 
-import com.isaias.arquitectura_hexagonal.domain.User;
-import com.isaias.arquitectura_hexagonal.domain.ports.in.CreateUserUseCase;
+import com.isaias.arquitectura_hexagonal.application.port.in.GetUsersUseCase;
+import com.isaias.arquitectura_hexagonal.application.port.out.UserRepositoryPort;
+import com.isaias.arquitectura_hexagonal.domain.model.User;
 
-public class UserService implements CreateUserUseCase {
-	private final CreateUserUseCase createUserUseCase;
+import java.util.List;
 
-	public UserService(CreateUserUseCase createUserUseCase) {
-		this.createUserUseCase = createUserUseCase;
+public class UserService implements GetUsersUseCase {
+	private final UserRepositoryPort userRepositoryPort;
+
+	public UserService(UserRepositoryPort userRepositoryPort) {
+		this.userRepositoryPort = userRepositoryPort;
 	}
 
 	@Override
-	public User create(User user) {
-		return createUserUseCase.create(user);
+	public List<User> getUsers() {
+		return userRepositoryPort.getUsers();
 	}
 }
