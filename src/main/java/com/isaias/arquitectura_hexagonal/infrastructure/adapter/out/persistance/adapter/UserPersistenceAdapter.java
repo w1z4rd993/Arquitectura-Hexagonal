@@ -1,4 +1,4 @@
-package com.isaias.arquitectura_hexagonal.infrastructure.adapter.out.persistance;
+package com.isaias.arquitectura_hexagonal.infrastructure.adapter.out.persistance.adapter;
 
 import com.isaias.arquitectura_hexagonal.application.port.out.UserRepositoryPort;
 import com.isaias.arquitectura_hexagonal.domain.exception.UserNotFoundException;
@@ -33,9 +33,7 @@ public class UserPersistenceAdapter implements UserRepositoryPort {
 
 	@Override
 	public User getById(Long id) {
-		return userRepository.findById(id)
-				.map(userMapper::toDomain)
-				.orElseThrow(() -> new UserNotFoundException("Usuario no encontrado"));
+		return userMapper.toDomain(userRepository.findUserById(id));
 	}
 
 	@Override
@@ -44,5 +42,12 @@ public class UserPersistenceAdapter implements UserRepositoryPort {
 			throw new UserNotFoundException("Usuario no encontrado");
 		}
 		userRepository.deleteById(id);
+	}
+
+	@Override
+	public User edit(Long id, User user) {
+		UserJpaEntity actualUser = userRepository.findUserById(id);
+		userMapper.updateFromDomain(user, actualUser);
+		return userMapper.toDomain(userRepository.save(actualUser));
 	}
 }

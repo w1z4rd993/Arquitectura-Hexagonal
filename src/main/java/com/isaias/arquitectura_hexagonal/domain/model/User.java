@@ -8,18 +8,6 @@ public class User {
 	private String email;
 
 	public User(Long id, String firstName, String lastName, String dni, String email) {
-		if (firstName == null || firstName.isEmpty()) {
-			throw new IllegalArgumentException("First name cannot be empty");
-		}
-		if (lastName == null || lastName.isEmpty()) {
-			throw new IllegalArgumentException("Last name cannot be empty");
-		}
-		if (dni == null || dni.isEmpty()) {
-			throw new IllegalArgumentException("DNI cannot be empty");
-		}
-		if (email == null || email.isEmpty()) {
-			throw new IllegalArgumentException("Email cannot be empty");
-		}
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;

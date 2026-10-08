@@ -12,4 +12,6 @@ public interface UserRepositoryPort {
 	User getById(Long id);
 
 	void deleteById(Long id);
+
+	User edit(Long id, User user);
 }
