@@ -3,15 +3,13 @@ package com.isaias.arquitectura_hexagonal.application.service;
 import com.isaias.arquitectura_hexagonal.application.port.in.*;
 import com.isaias.arquitectura_hexagonal.application.port.out.UserRepositoryPort;
 import com.isaias.arquitectura_hexagonal.domain.model.User;
+import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 public class UserService implements GetUsersUseCase, CreateUserUseCase, GetUserUseCase, DeleteUserUseCase, EditUserUseCase {
 	private final UserRepositoryPort userRepositoryPort;
-
-	public UserService(UserRepositoryPort userRepositoryPort) {
-		this.userRepositoryPort = userRepositoryPort;
-	}
 
 	@Override
 	public List<User> getUsers() {

@@ -14,20 +14,39 @@ java {
     }
 }
 
+ext {
+    mapStructVersion = "1.6.3"
+    lombokVersion = "1.18.46"
+    lombokMapStructBindingVersion = "0.2.0"
+}
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
+
+    // Spring Boot
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-webmvc'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation 'org.mapstruct:mapstruct:1.6.3'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    runtimeOnly 'org.postgresql:postgresql'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    // Postgresql
+    runtimeOnly 'org.postgresql:postgresql'
+
+    // Lombok
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    // MapStruct
+    implementation 'org.mapstruct:mapstruct:1.6.3'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'
+
+    // Binding Library
+    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapStructBindingVersion}"
 }
 
 tasks.named('test') {

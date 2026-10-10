@@ -9,6 +9,7 @@ import com.isaias.arquitectura_hexagonal.infrastructure.adapter.in.rest.dto.resp
 import com.isaias.arquitectura_hexagonal.infrastructure.adapter.in.rest.dto.response.UserDto;
 import com.isaias.arquitectura_hexagonal.infrastructure.adapter.in.rest.mapper.UserRestMapper;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/users")
+@RequiredArgsConstructor
 public class UserController {
 	private final GetUsersUseCase getUsersUseCase;
 	private final GetUserUseCase getUserUseCase;
@@ -24,16 +26,7 @@ public class UserController {
 	private final EditUserUseCase editUserUseCase;
 	private final DeleteUserUseCase deleteUserUseCase;
 	private final UserRestMapper userRestMapper;
-
-	public UserController(GetUsersUseCase getUsersUseCase, CreateUserUseCase createUserUseCase, GetUserUseCase getUserUseCase, EditUserUseCase editUserUseCase, DeleteUserUseCase deleteUserUseCase, UserRestMapper userRestMapper) {
-		this.getUsersUseCase = getUsersUseCase;
-		this.createUserUseCase = createUserUseCase;
-		this.getUserUseCase = getUserUseCase;
-		this.editUserUseCase = editUserUseCase;
-		this.deleteUserUseCase = deleteUserUseCase;
-		this.userRestMapper = userRestMapper;
-	}
-
+	
 	@GetMapping
 	public ResponseEntity<List<User>> getUsers() {
 		return ResponseEntity.ok(getUsersUseCase.getUsers());

@@ -6,20 +6,17 @@ import com.isaias.arquitectura_hexagonal.domain.model.User;
 import com.isaias.arquitectura_hexagonal.infrastructure.adapter.out.persistance.entity.UserJpaEntity;
 import com.isaias.arquitectura_hexagonal.infrastructure.adapter.out.persistance.mapper.UserPersistenceMapper;
 import com.isaias.arquitectura_hexagonal.infrastructure.adapter.out.persistance.repository.UserJpaRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class UserPersistenceAdapter implements UserRepositoryPort {
 	private final UserJpaRepository userRepository;
 	private final UserPersistenceMapper userMapper;
-
-	public UserPersistenceAdapter(UserJpaRepository userRepository, UserPersistenceMapper userMapper) {
-		this.userRepository = userRepository;
-		this.userMapper = userMapper;
-	}
-
+	
 	@Override
 	public List<User> getUsers() {
 		return userRepository.findAll().stream().map(userMapper::toDomain).toList();
