@@ -1,37 +1,20 @@
 package com.isaias.arquitectura_hexagonal.infrastructure.configuration;
 
-import com.isaias.arquitectura_hexagonal.application.port.in.*;
-import com.isaias.arquitectura_hexagonal.application.port.out.UserRepositoryPort;
-import com.isaias.arquitectura_hexagonal.application.service.UserService;
-import org.springframework.context.annotation.Bean;
+import com.isaias.arquitectura_hexagonal.application.annotation.UseCase;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
 @EnableWebMvc
+@ComponentScan(
+		basePackages = "com.isaias.arquitectura_hexagonal.application",
+		useDefaultFilters = false,
+		includeFilters = @ComponentScan.Filter(
+				type = FilterType.ANNOTATION,
+				classes = UseCase.class
+		)
+)
 public class BeanConfiguration {
-	@Bean
-	public GetUsersUseCase getUsersUseCase(UserRepositoryPort userRepositoryPort) {
-		return new UserService(userRepositoryPort);
-	}
-
-	@Bean
-	public CreateUserUseCase createUserUseCase(UserRepositoryPort userRepositoryPort) {
-		return new UserService(userRepositoryPort);
-	}
-
-	@Bean
-	public GetUserUseCase getUserUseCase(UserRepositoryPort userRepositoryPort) {
-		return new UserService(userRepositoryPort);
-	}
-
-	@Bean
-	public DeleteUserUseCase deleteUserUseCase(UserRepositoryPort userRepositoryPort) {
-		return new UserService(userRepositoryPort);
-	}
-
-	@Bean
-	public EditUserUseCase editUserUseCase(UserRepositoryPort userRepositoryPort) {
-		return new UserService(userRepositoryPort);
-	}
 }
